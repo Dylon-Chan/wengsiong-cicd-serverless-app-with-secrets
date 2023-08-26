@@ -1,0 +1,20 @@
+service: wengsiong-serverless-nodejs-api # name of the service
+frameworkVersion: '3'
+
+provider: # configuration for the service provider
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+  deploymentBucket:
+    name: cohort2.serverless.deploys
+
+functions: # configuration for the lambda functions
+  greeting:
+    handler: index.lambdaHandler
+    events: # events that trigger this lambda function
+      - httpApi:
+          path: /
+          method: get
+
+plugins:  # list of plugins to use
+  - serverless-offline
